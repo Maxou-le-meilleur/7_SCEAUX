@@ -19,7 +19,7 @@ struct carte
 //Déclaration des prototypes
 int nombre_joueur(void);
 int distrib(n);
-
+int test;
 //Variable globales
 int n;
 char j1[20];
