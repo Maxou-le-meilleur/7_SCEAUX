@@ -43,7 +43,6 @@ int main()
     printf("                          Serez-vous le plus grand mage que l'histoire ait connu?\n\n\n\n");
     nombre_joueur();
     affichagecartesJ1();
-    ChoixDesSceaux();
 }
 
 //Prototypes
@@ -137,21 +136,20 @@ void ChoixDesSceaux ()
     int c;
     while (c!=7)
     {
-        printf("\nTapez 1 pour choisir un sceaux Jaune \nTapez 2 pour choisir un sceaux Vert\nTapez 3 pour choisir un sceaux Bleu\nTapez 4 pour choisir un sceaux Rouge\nTapez 5 pour choisir un sceaux Blanc\nTapez 6 pour choisir un sceaux Noir\nLorsque vous avez fini tapez 7    %d");
-        scanf("%d",&c);
+        printf("\nTapez 1 pour choisir un sceaux Jaune \nTapez 2 pour choisir un sceaux Vert\nTapez 3 pour choisir un sceaux Bleu\nTapez 4 pour choisir un sceaux Rouge\nTapez 5 pour choisir un sceaux Blanc\nTapez 6 pour choisir un sceaux Noir\nLorsque vous avez fini tapez 7    %d",&c);
         switch (c)
         {
-            case 1 : j=j+1;
+            case 1 : j++;
             break;
-            case 2 : v=v+1;
+            case 2 : v++;
             break;
-            case 3 : b=b+1;
+            case 3 : b++;
             break;
-            case 4 : r=r+1;
+            case 4 : r++;
             break;
-            case 5 : w=w+1;
+            case 5 : w
             break;
-            case 6 : n=n+1;
+            case 6 : n=n+1
             break;
         }
     }
