@@ -117,14 +117,34 @@ int distrib(int n)
     }
     return 0;
 }
-void affichagecartesJ1 ()
+void affichagecartesJ1 (int f)
 {
     int i;
     printf ("Joueur 1 votre jeu \n ");
-    for (i=0;i<= nb2cartes - 1; i++)
+    for (int e=0; e<15; e++1)
     {
-        printf ("  %d  ",joueur[1].jeu[i]);
+        if (joueur[f].jeu[e]<(nb2cartes/5)
+        {
+            printf("\n %d bleu", joueur[f].jeu[e]+1);
+        }
+        else if (joueur[f].jeu[e]<(2*nb2cartes/5))
+        {
+            printf("\n %d jaune", joueur[f].jeu[e]+1);
+        }
+        else if (joueur[f].jeu[e]<(3*nb2cartes/5))
+        {
+            printf("\n %d rouge", joueur[f].jeu[e]+1);
+        }
+        else if (joueur[f].jeu[e]<(4*nb2cartes/5))
+        {
+            printf("\n %d violet", joueur[f].jeu[e]+1);
+        }
+        else if (joueur[f].jeu[e]<(nb2cartes)
+        {
+            printf("\n %d vert", joueur[f].jeu[e]+1);
+        }
     }
+
 }
 void ChoixDesSceaux ()
 {
@@ -157,4 +177,9 @@ void ChoixDesSceaux ()
     }
     printf ("\nvous avez %d sceaux Jaunes",j);
 
+
 }
+
+
+
+
