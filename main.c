@@ -16,6 +16,11 @@ struct joueur
 {
     char prenom[20];
     int jeu[14];
+    int sceauR;
+    int sceauB;
+    int sceauV;
+    int sceauJ;
+    int sceauVi;
 };
 
 typedef struct joueur S_joueur;
@@ -28,10 +33,15 @@ S_joueur joueur[4];
 int nombre_joueur(void);
 int distrib(int n);
 int defdeck(int n);
+int prediction(int a);
+void ChoixDesSceaux(void);
+void affichagecartes(int f);
+void tour1(void);
 
 //Variable globales
 int n;
 int nb2cartes;
+
 
 //Programme principal
 
@@ -42,8 +52,7 @@ int main()
     printf("                                               7 SEAUX\n\n\n");
     printf("                          Serez-vous le plus grand mage que l'histoire ait connu?\n\n\n\n");
     nombre_joueur();
-    affichagecartesJ1();
-    ChoixDesSceaux();
+    affichagecartes(2);
 }
 
 //Prototypes
@@ -117,69 +126,66 @@ int distrib(int n)
     }
     return 0;
 }
-void affichagecartesJ1 (int f)
+void affichagecartes(f)
 {
     int i;
     printf ("Joueur 1 votre jeu \n ");
-    for (int e=0; e<15; e++1)
+    for (int e=0; e < 15; e++)
     {
-        if (joueur[f].jeu[e]<(nb2cartes/5)
+        if (joueur[f].jeu[e]<(nb2cartes/5))
         {
             printf("\n %d bleu", joueur[f].jeu[e]+1);
         }
-        else if (joueur[f].jeu[e]<(2*nb2cartes/5))
+        if (joueur[f].jeu[e]<(2*nb2cartes/5) && joueur[f].jeu[e]>=(nb2cartes/5));
         {
             printf("\n %d jaune", joueur[f].jeu[e]+1);
         }
-        else if (joueur[f].jeu[e]<(3*nb2cartes/5))
+        if (joueur[f].jeu[e]<(3*nb2cartes/5) && joueur[f].jeu[e]>=(2*nb2cartes/5));
         {
             printf("\n %d rouge", joueur[f].jeu[e]+1);
         }
-        else if (joueur[f].jeu[e]<(4*nb2cartes/5))
+        if (joueur[f].jeu[e]<(4*nb2cartes/5) && joueur[f].jeu[e]>=(3*nb2cartes/5));
         {
             printf("\n %d violet", joueur[f].jeu[e]+1);
         }
-        else if (joueur[f].jeu[e]<(nb2cartes)
+        if (joueur[f].jeu[e]<(5*nb2cartes/5) && joueur[f].jeu[e]>=(4*nb2cartes/5));
         {
             printf("\n %d vert", joueur[f].jeu[e]+1);
         }
     }
-
 }
-void ChoixDesSceaux ()
+int prediction(a)
 {
-    int j=0;
-    int v=0;
-    int b=0;
-    int r=0;
-    int n=0;
-    int w=0;
-    int c;
-    while (c!=7)
+    char non[] = "non";
+    char reponse[3];
+    printf ("Joueur %d voulez vous prendre le mage noir?",a);
+    gets(reponse);
+    if (strcmp(reponse,non) == 0)
     {
-        printf("\nTapez 1 pour choisir un sceaux Jaune \nTapez 2 pour choisir un sceaux Vert\nTapez 3 pour choisir un sceaux Bleu\nTapez 4 pour choisir un sceaux Rouge\nTapez 5 pour choisir un sceaux Blanc\nTapez 6 pour choisir un sceaux Noir\nLorsque vous avez fini tapez 7    %d");
-        scanf("%d",&c);
-        switch (c)
-        {
-            case 1 : j=j+1;
-            break;
-            case 2 : v=v+1;
-            break;
-            case 3 : b=b+1;
-            break;
-            case 4 : r=r+1;
-            break;
-            case 5 : w=w+1;
-            break;
-            case 6 : n=n+1;
-            break;
-        }
+        printf("\n Joueur %d quel est votre prediction pour la couleur rouge?",a);
+        scanf("%d",joueur[a].sceauR);
+        printf("\n Joueur %d quel est votre prediction pour la couleur bleu?",a);
+        scanf("%d",joueur[a].sceauB);
+        printf("\n Joueur %d quel est votre prediction pour la couleur vert?",a);
+        scanf("%d",joueur[a].sceauV);
+        printf("\n Joueur %d quel est votre prediction pour la couleur jaune?",a);
+        scanf("%d",joueur[a].sceauJ);
+        printf("\n Joueur %d quel est votre prediction pour la couleur violet?",a);
+        scanf("%d",joueur[a].sceauVi);
     }
-    printf ("\nvous avez %d sceaux Jaunes",j);
-
+    else;
+    {
+        printf("Vous avez pris le mage noir!");
+    }
 
 }
 
+void tour1()
+{
+    int i;
+    for (i=1; i<=5; i++)
+    prediction(i);
 
 
+}
 
