@@ -41,6 +41,11 @@ void tour1(void);
 //Variable globales
 int n;
 int nb2cartes;
+int p;
+int d;
+int t;
+int q;
+int c;
 
 
 //Programme principal
@@ -53,12 +58,12 @@ int main()
     printf("                          Serez-vous le plus grand mage que l'histoire ait connu?\n\n\n\n");
     nombre_joueur();
     affichagecartes(2);
+    tour1();
 }
 
 //Prototypes
 int nombre_joueur()
 {
-    int n;
     printf("                          Pour commencer veuillez indiquer le nombre de joueur : ");
     scanf("%d",&n);
 
@@ -159,7 +164,7 @@ int prediction(a)
     char non[] = "non";
     char reponse[3];
     printf ("Joueur %d voulez vous prendre le mage noir?",a);
-    gets(reponse);
+    scanf(reponse);
     if (strcmp(reponse,non) == 0)
     {
         printf("\n Joueur %d quel est votre prediction pour la couleur rouge?",a);
@@ -180,11 +185,129 @@ int prediction(a)
 
 }
 
-void tour1()
+void Jeu()
+{
+    int j;
+    int r;
+ //joeur 1
+      for (j=1; j<=nb2cartes; j++)
+      {
+          printf("\n !%c!",joueur[1].jeu[j]);
+      }
+      printf("\njoueur 1 quel est le numéro de la carte que vous voulez poser ?");
+      scanf("%d",&r);
+      printf("\nvous avez posé la carte %c", joueur[1].jeu[r]);
+      joueur[1].jeu[r]= p;
+//joueur 2
+      for (j=1; j<=nb2cartes; j++)
+      {
+          printf("\n !%c!",joueur[2].jeu[j]);
+      }
+      printf("\njoueur 2 quel est le numéro de la carte que vous voulez poser ?");
+      scanf("%d",&r);
+      printf("\nvous avez posé la carte %c", joueur[2].jeu[r]);
+      joueur[2].jeu[r]= d;
+//joueur 3
+    for (j=1; j<=nb2cartes; j++)
+      {
+          printf("\n !%c!",joueur[3].jeu[j]);
+      }
+      printf("\njoueur 3 quel est le numéro de la carte que vous voulez poser ?");
+      scanf("%d",&r);
+      printf("\nvous avez posé la carte %c", joueur[3].jeu[r]);
+      joueur[3].jeu[r]= t;
+if (n>=4)
+    for (j=1; j<=nb2cartes; j++)
+      {
+          printf("\n !%c!",joueur[4].jeu[j]);
+      }
+      printf("\njoueur 4 quel est le numéro de la carte que vous voulez poser ?");
+      scanf("%d",&r);
+      printf("\nvous avez posé la carte %c", joueur[4].jeu[r]);
+      joueur[4].jeu[r]= q;
+if (n>4)
+      for (j=1; j<=nb2cartes; j++)
+      {
+          printf("\n !%c!",joueur[5].jeu[j]);
+      }
+      printf("\njoueur 5 quel est le numéro de la carte que vous voulez poser ?");
+      scanf("%d",&r);
+      printf("\nvous avez posé la carte %c", joueur[5].jeu[r]);
+      joueur[5].jeu[r]= c;
+
+
+
+}
+
+void Comparaisoncartes ()
+{
+    if (n<4)
+        if (p>d)
+            if (p>t)
+            printf("le joueur 1 remporte le tour");
+        if (d>p)
+            if (d>t)
+            printf("le joueur 2 remporte le tour");
+        if (t>p)
+            if (t>d)
+            printf("le joueur 3 remporte le tour");
+    if (n=4)
+        if (p>d)
+            if (p>t)
+                if (p>q)
+                printf("le joueur 1 remporte le tour");
+        if (d>p)
+            if (d>t)
+                if (d>q)
+                printf("le joueur 2 remporte le tour");
+        if (t>p)
+            if (t>d)
+                if (t>q)
+                printf("le joueur 3 remporte le tour");
+        if (q>p)
+            if (q>d)
+                if (q>t)
+                printf("le joueur 4 remporte le tour");
+    if (n>4)
+        if (p>d)
+            if (p>t)
+                if (p>q)
+                    if (p>c)
+                printf("le joueur 1 remporte le tour");
+        if (d>p)
+            if (d>t)
+                if (d>q)
+                    if (d>c)
+                printf("le joueur 2 remporte le tour");
+        if (t>p)
+            if (t>d)
+                if (t>q)
+                    if (t>c)
+                printf("le joueur 3 remporte le tour");
+        if (q>p)
+            if (q>d)
+                if (q>t)
+                    if (q>c)
+                printf("le joueur 4 remporte le tour");
+        if (c>p)
+            if (c>d)
+                if (c>t)
+                    if (c>q)
+                        printf("le joueur 5 remporte le tour");
+
+}
+
+
+void tour1 ()
 {
     int i;
-    for (i=1; i<=5; i++)
-    prediction(i);
+    for (i=1; i<=n; i++)
+    {
+        prediction(i);
+    }
+    Jeu();
+    Comparaisoncartes();
+
 
 
 }
