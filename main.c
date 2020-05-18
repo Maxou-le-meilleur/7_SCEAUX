@@ -107,14 +107,6 @@ int nombre_joueur()
     printf("\nLe joueur a la gauche du joueur 3 doit entrer son prenom : ");
     scanf("%s",&joueur[2].prenom[20]);
     Sleep (500);
-
-    printf("Le joueur ayant allume le jeu sera Ogarorin!\n");
-    Sleep (1000);
-    printf("Le joueur a la gauche de Ogarorin sera Atras!\n");
-    Sleep (1000);
-    printf("Le joueur a la gauche de Astras sera Ekyorn!\n");
-    Sleep (1000);
-
     if (n==4)
     {
         printf("\nLe joueur a la gauche du joueur 4 doit entrer son prenom : ");
@@ -146,7 +138,7 @@ int defdeck(n)
     return nb2cartes;
 }
 
-int distrib(int n)
+int distrib(n)
 {
     int i;
     int tab[nb2cartes - 1];
@@ -157,15 +149,14 @@ int distrib(int n)
     for (i=0; i<= nb2cartes - 1; i++)
     {
         int alea = rand()% (nb2cartes - i);
-        joueur[(i/15)+1].jeu[i/n]=tab[alea];
+        joueur[(i/15)].jeu[i/n]=tab[alea];
         tab[alea]=tab[nb2cartes - i];
     }
     return 0;
 }
 void affichagecartes(int f)
 {
-    int i;
-    printf ("Joueur %d votre jeu \n ",i);
+    printf ("Joueur %d votre jeu \n ",f);
     for (int e=0; e < 15; e++)
     {
         if (joueur[f].jeu[e]<(nb2cartes/5))
@@ -304,32 +295,32 @@ void Jeu()
       affichagecartes(1);
       printf("\njoueur 1 quel est le numero de la carte que vous voulez poser ?");
       scanf("%d",&r);
-      printf("\nvous avez posé la carte %c", joueur[1].jeu[r]);
-      joueur[1].jeu[r]= p;
+      printf("\nvous avez posé la carte %c", joueur[0].jeu[r]);
+      joueur[0].jeu[r]= p;
 //joueur 2
       affichagecartes(2);
       printf("\njoueur 2 quel est le numero de la carte que vous voulez poser ?");
       scanf("%d",&r);
-      printf("\nvous avez posé la carte %c", joueur[2].jeu[r]);
-      joueur[2].jeu[r]= d;
+      printf("\nvous avez posé la carte %c", joueur[1].jeu[r]);
+      joueur[1].jeu[r]= d;
 //joueur 3
       affichagecartes(3);
       printf("\njoueur 3 quel est le numero de la carte que vous voulez poser ?");
       scanf("%d",&r);
-      printf("\nvous avez posé la carte %c", joueur[3].jeu[r]);
-      joueur[3].jeu[r]= t;
+      printf("\nvous avez posé la carte %c", joueur[2].jeu[r]);
+      joueur[2].jeu[r]= t;
 if (n>=4)
       affichagecartes(4);
       printf("\njoueur 4 quel est le numero de la carte que vous voulez poser ?");
       scanf("%d",&r);
-      printf("\nvous avez posé la carte %c", joueur[4].jeu[r]);
-      joueur[4].jeu[r]= q;
+      printf("\nvous avez posé la carte %c", joueur[3].jeu[r]);
+      joueur[3].jeu[r]= q;
 if (n>4)
       affichagecartes(5);
       printf("\njoueur 5 quel est le numero de la carte que vous voulez poser ?");
       scanf("%d",&r);
-      printf("\nvous avez posé la carte %c", joueur[5].jeu[r]);
-      joueur[5].jeu[r]= c;
+      printf("\nvous avez posé la carte %c", joueur[4].jeu[r]);
+      joueur[4].jeu[r]= c;
     return p;
     return q;
     return t;
@@ -355,7 +346,7 @@ void ComparaisonCartes()
             printf("le joueur 3 remporte le tour");
             V=3;
         }
-    if (n=4)
+    if (n==4)
         if (p>d && p>t && p>q)
         {
             printf("le joueur 1 remporte le tour");
@@ -414,78 +405,78 @@ void gainSceaux()
     switch (r)
     {
         case 1 :
-            if (V=1)
+            if (V==1)
             {
-                joueur [1].sceauR = joueur [1].sceauR-1;
+                joueur [0].sceauR = joueur [0].sceauR-1;
             }
             else
             {
-                if (V=2)
-                    joueur [2].sceauR = joueur [1].sceauR-1;
+                if (V==2)
+                    joueur [1].sceauR = joueur [1].sceauR-1;
                 else
                 {
-                    if (V=3)
-                        joueur [3].sceauR = joueur [1].sceauR-1;
+                    if (V==3)
+                        joueur [2].sceauR = joueur [2].sceauR-1;
                     else
                     {
-                        if (V=4)
-                            joueur [4].sceauR = joueur [1].sceauR-1;
+                        if (V==4)
+                            joueur [3].sceauR = joueur [3].sceauR-1;
                         else
                         {
-                            if (V=5)
-                                joueur [5].sceauR = joueur [1].sceauR-1;
+                            if (V==5)
+                                joueur [4].sceauR = joueur [4].sceauR-1;
                         }
                     }
                 }
             }
         break;
         case 2 :
-            if (V=1)
-                joueur[1].sceauB = joueur[1].sceauB-1;
-            if (V=2)
-                joueur [2].sceauB = joueur[1].sceauB-1;
-            if (V=3)
-                joueur [3].sceauB = joueur[1].sceauB-1;
-            if (V=4)
-                joueur [4].sceauB = joueur[1].sceauB-1;
-            if (V=5)
-                joueur [5].sceauB = joueur[1].sceauB-1;
+            if (V==1)
+                joueur[0].sceauB = joueur[0].sceauB-1;
+            if (V==2)
+                joueur [1].sceauB = joueur[1].sceauB-1;
+            if (V==3)
+                joueur [2].sceauB = joueur[2].sceauB-1;
+            if (V==4)
+                joueur [3].sceauB = joueur[3].sceauB-1;
+            if (V==5)
+                joueur [4].sceauB = joueur[4].sceauB-1;
         break;
         case 3 :
-            if (V=1)
-                joueur[1].sceauV = joueur[1].sceauV-1;
-            if (V=2)
-                joueur [2].sceauV = joueur[1].sceauV-1;
-            if (V=3)
-                joueur [3].sceauV = joueur[1].sceauV-1;
-            if (V=4)
-                joueur [4].sceauV = joueur[1].sceauV-1;
-            if (V=5)
-                joueur [5].sceauV = joueur[1].sceauV-1;
+            if (V==1)
+                joueur[0].sceauV = joueur[0].sceauV-1;
+            if (V==2)
+                joueur [1].sceauV = joueur[1].sceauV-1;
+            if (V==3)
+                joueur [2].sceauV = joueur[2].sceauV-1;
+            if (V==4)
+                joueur [3].sceauV = joueur[3].sceauV-1;
+            if (V==5)
+                joueur [4].sceauV = joueur[4].sceauV-1;
         break;
         case 4 :
-            if (V=1)
-                joueur[1].sceauJ = joueur[1].sceauJ-1;
-            if (V=2)
-                joueur [2].sceauJ = joueur[1].sceauJ-1;
-            if (V=3)
-                joueur [3].sceauJ = joueur[1].sceauJ-1;
-            if (V=4)
-                joueur [4].sceauJ = joueur[1].sceauJ-1;
-            if (V=5)
-                joueur [5].sceauJ = joueur[1].sceauJ-1;
+            if (V==1)
+                joueur[0].sceauJ = joueur[0].sceauJ-1;
+            if (V==2)
+                joueur [1].sceauJ = joueur[1].sceauJ-1;
+            if (V==3)
+                joueur [2].sceauJ = joueur[2].sceauJ-1;
+            if (V==4)
+                joueur [3].sceauJ = joueur[3].sceauJ-1;
+            if (V==5)
+                joueur [4].sceauJ = joueur[4].sceauJ-1;
         break;
         default :
-            if (V=1)
-                joueur[1].sceauVi = joueur[1].sceauVi-1;
-            if (V=2)
-                joueur [2].sceauVi = joueur[1].sceauVi-1;
-            if (V=3)
-                joueur [3].sceauVi = joueur[1].sceauVi-1;
-            if (V=4)
-                joueur [4].sceauVi = joueur[1].sceauVi-1;
-            if (V=5)
-                joueur [5].sceauVi = joueur[1].sceauVi-1;
+            if (V==1)
+                joueur[0].sceauVi = joueur[0].sceauVi-1;
+            if (V==2)
+                joueur [1].sceauVi = joueur[1].sceauVi-1;
+            if (V==3)
+                joueur [2].sceauVi = joueur[2].sceauVi-1;
+            if (V==4)
+                joueur [3].sceauVi = joueur[3].sceauVi-1;
+            if (V==5)
+                joueur [4].sceauVi = joueur[4].sceauVi-1;
         break;
     }
 }
@@ -508,143 +499,143 @@ int tour()
 
 int penalite()
 {
-    if (n=3)
+    if (n==3)
     {
+        joueur[0].penalite = 2*(joueur[0].sceauR + joueur[0].sceauB + joueur[0].sceauV + joueur[0].sceauJ + joueur[0].sceauVi);
+        joueur[1].penalite = 2*(joueur[1].sceauR + joueur[1].sceauB + joueur[1].sceauV + joueur[1].sceauJ + joueur[1].sceauVi);
+        joueur[2].penalite = 2*(joueur[2].sceauR + joueur[2].sceauB + joueur[2].sceauV + joueur[2].sceauJ + joueur[2].sceauVi);
+        if (joueur[0].penalite < joueur[1].penalite && joueur[0].penalite < joueur[2].penalite)
+        {
+            printf("Le joueur 1 a gagne cette manche!");
+            joueur[0].victoire = joueur[0].victoire+1;
+        }
+        if (joueur[1].penalite < joueur[0].penalite && joueur[1].penalite < joueur[2].penalite)
+        {
+            printf("Le joueur 2 a gagne cette manche!");
+            joueur[1].victoire = joueur[1].victoire+1;
+        }
+        if (joueur[2].penalite < joueur[0].penalite && joueur[2].penalite < joueur[1].penalite)
+        {
+            printf("Le joueur 3 a gagne cette manche!");
+            joueur[2].victoire = joueur[2].victoire+1;
+        }
+    }
+    if (n==4)
+    {
+        joueur[0].penalite = 2*(joueur[0].sceauR + joueur[0].sceauB + joueur[0].sceauV + joueur[0].sceauJ + joueur[0].sceauVi);
         joueur[1].penalite = 2*(joueur[1].sceauR + joueur[1].sceauB + joueur[1].sceauV + joueur[1].sceauJ + joueur[1].sceauVi);
         joueur[2].penalite = 2*(joueur[2].sceauR + joueur[2].sceauB + joueur[2].sceauV + joueur[2].sceauJ + joueur[2].sceauVi);
         joueur[3].penalite = 2*(joueur[3].sceauR + joueur[3].sceauB + joueur[3].sceauV + joueur[3].sceauJ + joueur[3].sceauVi);
-        if (joueur[1].penalite < joueur[2].penalite && joueur[1].penalite < joueur[3].penalite)
+        if (joueur[0].penalite < joueur[1].penalite && joueur[0].penalite < joueur[2].penalite && joueur[0].penalite < joueur[3].penalite)
         {
             printf("Le joueur 1 a gagne cette manche!");
-            joueur[1].victoire = joueur[1].victoire+1;
+            joueur[0].victoire = joueur[0].victoire+1;
         }
-        if (joueur[2].penalite < joueur[1].penalite && joueur[2].penalite < joueur[3].penalite)
+        if (joueur[1].penalite < joueur[0].penalite && joueur[1].penalite < joueur[2].penalite && joueur[1].penalite < joueur[3].penalite)
         {
             printf("Le joueur 2 a gagne cette manche!");
-            joueur[2].victoire = joueur[2].victoire+1;
+            joueur[1].victoire = joueur[1].victoire+1;
         }
-        if (joueur[3].penalite < joueur[1].penalite && joueur[3].penalite < joueur[2].penalite)
+        if (joueur[2].penalite < joueur[0].penalite && joueur[2].penalite < joueur[1].penalite && joueur[2].penalite < joueur[3].penalite)
         {
             printf("Le joueur 3 a gagne cette manche!");
+            joueur[2].victoire = joueur[2].victoire+1;
+        }
+        if (joueur[3].penalite < joueur[0].penalite && joueur[3].penalite < joueur[1].penalite && joueur[3].penalite < joueur[2].penalite)
+        {
+            printf("Le joueur 4 a gagne cette manche!");
             joueur[3].victoire = joueur[3].victoire+1;
         }
     }
-    if (n=4)
+    if (n==5)
     {
+        joueur[0].penalite = 2*(joueur[0].sceauR + joueur[0].sceauB + joueur[0].sceauV + joueur[0].sceauJ + joueur[0].sceauVi);
         joueur[1].penalite = 2*(joueur[1].sceauR + joueur[1].sceauB + joueur[1].sceauV + joueur[1].sceauJ + joueur[1].sceauVi);
         joueur[2].penalite = 2*(joueur[2].sceauR + joueur[2].sceauB + joueur[2].sceauV + joueur[2].sceauJ + joueur[2].sceauVi);
         joueur[3].penalite = 2*(joueur[3].sceauR + joueur[3].sceauB + joueur[3].sceauV + joueur[3].sceauJ + joueur[3].sceauVi);
         joueur[4].penalite = 2*(joueur[4].sceauR + joueur[4].sceauB + joueur[4].sceauV + joueur[4].sceauJ + joueur[4].sceauVi);
-        if (joueur[1].penalite < joueur[2].penalite && joueur[1].penalite < joueur[3].penalite && joueur[1].penalite < joueur[4].penalite)
+        if (joueur[0].penalite < joueur[1].penalite && joueur[0].penalite < joueur[2].penalite && joueur[0].penalite < joueur[3].penalite && joueur[0].penalite < joueur[4].penalite)
         {
             printf("Le joueur 1 a gagne cette manche!");
-            joueur[1].victoire = joueur[1].victoire+1;
+            joueur[0].victoire = joueur[0].victoire+1;
         }
-        if (joueur[2].penalite < joueur[1].penalite && joueur[2].penalite < joueur[3].penalite && joueur[2].penalite < joueur[4].penalite)
+        if (joueur[1].penalite < joueur[0].penalite && joueur[1].penalite < joueur[2].penalite && joueur[1].penalite < joueur[3].penalite && joueur[1].penalite < joueur[4].penalite)
         {
             printf("Le joueur 2 a gagne cette manche!");
-            joueur[2].victoire = joueur[2].victoire+1;
-        }
-        if (joueur[3].penalite < joueur[1].penalite && joueur[3].penalite < joueur[3].penalite && joueur[3].penalite < joueur[4].penalite)
-        {
-            printf("Le joueur 3 a gagne cette manche!");
-            joueur[3].victoire = joueur[3].victoire+1;
-        }
-        if (joueur[4].penalite < joueur[1].penalite && joueur[4].penalite < joueur[2].penalite && joueur[4].penalite < joueur[3].penalite)
-        {
-            printf("Le joueur 4 a gagne cette manche!");
-            joueur[4].victoire = joueur[4].victoire+1;
-        }
-    }
-    if (n=5)
-    {
-        joueur[1].penalite = 2*(joueur[1].sceauR + joueur[1].sceauB + joueur[1].sceauV + joueur[1].sceauJ + joueur[1].sceauVi);
-        joueur[2].penalite = 2*(joueur[2].sceauR + joueur[2].sceauB + joueur[2].sceauV + joueur[2].sceauJ + joueur[2].sceauVi);
-        joueur[3].penalite = 2*(joueur[3].sceauR + joueur[3].sceauB + joueur[3].sceauV + joueur[3].sceauJ + joueur[3].sceauVi);
-        joueur[4].penalite = 2*(joueur[4].sceauR + joueur[4].sceauB + joueur[4].sceauV + joueur[4].sceauJ + joueur[4].sceauVi);
-        joueur[4].penalite = 2*(joueur[5].sceauR + joueur[5].sceauB + joueur[5].sceauV + joueur[5].sceauJ + joueur[5].sceauVi);
-        if (joueur[1].penalite < joueur[2].penalite && joueur[1].penalite < joueur[3].penalite && joueur[1].penalite < joueur[4].penalite && joueur[1].penalite < joueur[5].penalite)
-        {
-            printf("Le joueur 1 a gagne cette manche!");
             joueur[1].victoire = joueur[1].victoire+1;
         }
-        if (joueur[2].penalite < joueur[1].penalite && joueur[2].penalite < joueur[3].penalite && joueur[2].penalite < joueur[4].penalite && joueur[2].penalite < joueur[5].penalite)
-        {
-            printf("Le joueur 2 a gagne cette manche!");
-            joueur[2].victoire = joueur[2].victoire+1;
-        }
-        if (joueur[3].penalite < joueur[1].penalite && joueur[3].penalite < joueur[2].penalite && joueur[3].penalite < joueur[4].penalite && joueur[3].penalite < joueur[5].penalite)
+        if (joueur[2].penalite < joueur[0].penalite && joueur[2].penalite < joueur[1].penalite && joueur[2].penalite < joueur[3].penalite && joueur[2].penalite < joueur[4].penalite)
         {
             printf("Le joueur 3 a gagne cette manche!");
-            joueur[3].victoire = joueur[3].victoire+1;
+            joueur[2].victoire = joueur[2].victoire+1;
         }
-        if (joueur[4].penalite < joueur[1].penalite && joueur[4].penalite < joueur[2].penalite && joueur[4].penalite < joueur[3].penalite && joueur[4].penalite < joueur[5].penalite)
+        if (joueur[3].penalite < joueur[0].penalite && joueur[3].penalite < joueur[1].penalite && joueur[3].penalite < joueur[2].penalite && joueur[3].penalite < joueur[4].penalite)
         {
             printf("Le joueur 4 a gagne cette manche!");
-            joueur[4].victoire = joueur[4].victoire+1;
+            joueur[3].victoire = joueur[3].victoire+1;
         }
-        if (joueur[5].penalite < joueur[1].penalite && joueur[5].penalite < joueur[2].penalite && joueur[5].penalite < joueur[3].penalite && joueur[5].penalite < joueur[4].penalite)
+        if (joueur[4].penalite < joueur[0].penalite && joueur[4].penalite < joueur[1].penalite && joueur[4].penalite < joueur[2].penalite && joueur[4].penalite < joueur[3].penalite)
         {
             printf("Le joueur 5 a gagne cette manche!");
-            joueur[5].victoire = joueur[5].victoire+1;
+            joueur[4].victoire = joueur[4].victoire+1;
         }
     }
 }
 int vainqueur()
 {
-    if (n=3)
+    if (n==3)
     {
-        if (joueur[1].victoire < joueur[2].victoire && joueur[1].victoire < joueur[3].victoire)
+        if (joueur[0].victoire < joueur[1].victoire && joueur[0].victoire < joueur[2].victoire)
         {
             printf("Le joueur 1 a gagne la partie!");
         }
-        if (joueur[2].victoire < joueur[1].victoire && joueur[2].victoire < joueur[3].victoire)
+        if (joueur[1].victoire < joueur[0].victoire && joueur[1].victoire < joueur[2].victoire)
         {
             printf("Le joueur 2 a gagne la partie!");
         }
-        if (joueur[3].victoire < joueur[1].victoire && joueur[3].victoire < joueur[2].victoire)
+        if (joueur[2].victoire < joueur[0].victoire && joueur[2].victoire < joueur[1].victoire)
         {
             printf("Le joueur 3 a gagne la partie!");
         }
     }
-    if (n=4)
+    if (n==4)
     {
-        if (joueur[1].victoire < joueur[2].victoire && joueur[1].victoire < joueur[3].victoire && joueur[1].victoire < joueur[4].victoire)
+        if (joueur[0].victoire < joueur[1].victoire && joueur[0].victoire < joueur[2].victoire && joueur[0].victoire < joueur[3].victoire)
         {
             printf("Le joueur 1 a gagne la partie!");
         }
-        if (joueur[2].victoire < joueur[1].victoire && joueur[2].victoire < joueur[3].victoire && joueur[2].victoire < joueur[4].victoire)
+        if (joueur[1].victoire < joueur[0].victoire && joueur[1].victoire < joueur[2].victoire && joueur[1].victoire < joueur[3].victoire)
         {
             printf("Le joueur 2 a gagne la partie!");
         }
-        if (joueur[3].victoire < joueur[1].victoire && joueur[3].victoire < joueur[3].victoire && joueur[3].victoire < joueur[4].victoire)
+        if (joueur[2].victoire < joueur[0].victoire && joueur[2].victoire < joueur[1].victoire && joueur[2].victoire < joueur[3].victoire)
         {
             printf("Le joueur 3 a gagne la partie!");
         }
-        if (joueur[4].victoire < joueur[1].victoire && joueur[4].victoire < joueur[2].victoire && joueur[4].victoire < joueur[3].victoire)
+        if (joueur[3].victoire < joueur[0].victoire && joueur[3].victoire < joueur[1].victoire && joueur[3].victoire < joueur[2].victoire)
         {
             printf("Le joueur 4 a gagne la partie!");
         }
     }
-    if (n=5)
+    if (n==5)
     {
-        if (joueur[1].victoire < joueur[2].victoire && joueur[1].victoire < joueur[3].victoire && joueur[1].victoire < joueur[4].victoire && joueur[1].victoire < joueur[5].victoire)
+        if (joueur[0].victoire < joueur[1].victoire && joueur[0].victoire < joueur[2].victoire && joueur[0].victoire < joueur[3].victoire && joueur[0].victoire < joueur[4].victoire)
         {
             printf("Le joueur 1 a gagne la partie!");
         }
-        if (joueur[2].victoire < joueur[1].victoire && joueur[2].victoire < joueur[3].victoire && joueur[2].victoire < joueur[4].victoire && joueur[2].victoire < joueur[5].victoire)
+        if (joueur[1].victoire < joueur[0].victoire && joueur[1].victoire < joueur[2].victoire && joueur[1].victoire < joueur[3].victoire && joueur[1].victoire < joueur[4].victoire)
         {
             printf("Le joueur 2 a gagne la partie!");
         }
-        if (joueur[3].victoire < joueur[1].victoire && joueur[3].victoire < joueur[2].victoire && joueur[3].victoire < joueur[4].victoire && joueur[3].victoire < joueur[5].victoire)
+        if (joueur[2].victoire < joueur[0].victoire && joueur[2].victoire < joueur[1].victoire && joueur[2].victoire < joueur[3].victoire && joueur[2].victoire < joueur[4].victoire)
         {
             printf("Le joueur 3 a gagne la partie!");
         }
-        if (joueur[4].victoire < joueur[1].victoire && joueur[4].victoire < joueur[2].victoire && joueur[4].victoire < joueur[3].victoire && joueur[4].victoire < joueur[5].victoire)
+        if (joueur[3].victoire < joueur[0].victoire && joueur[3].victoire < joueur[1].victoire && joueur[3].victoire < joueur[2].victoire && joueur[3].victoire < joueur[4].victoire)
         {
             printf("Le joueur 4 a gagne la partie!");
         }
-        if (joueur[5].victoire < joueur[1].victoire && joueur[5].victoire < joueur[2].victoire && joueur[5].victoire < joueur[3].victoire && joueur[5].victoire < joueur[4].victoire)
+        if (joueur[4].victoire < joueur[0].victoire && joueur[4].victoire < joueur[1].victoire && joueur[4].victoire < joueur[2].victoire && joueur[4].victoire < joueur[3].victoire)
         {
             printf("Le joueur 5 a gagne la partie!");
         }
