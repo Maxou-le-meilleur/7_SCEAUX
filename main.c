@@ -20,8 +20,9 @@ struct joueur
     int sceauB;
     int sceauV;
     int sceauJ;
-    int sceauVi;//il faut mêtre un mage noir non?
-
+    int sceauVi;
+    int penalite;
+    int victoire;
 };
 
 typedef struct joueur S_joueur;
@@ -37,16 +38,19 @@ int defdeck(int n);
 int prediction(int a);
 void ChoixDesSceaux(void);
 void affichagecartes(int f);
-void tour1(void);
+int tour(void);
+int penalite(void);
+int vainqueur(void);
 
 //Variable globales
 int n;
 int nb2cartes;
-int p=NULL;
-int d=NULL;
-int t=NULL;
-int q=NULL;
-int c=NULL;
+int p=0;
+int d=0;
+int t=0;
+int q=0;
+int c=0;
+int V=0;
 
 
 //Programme principal
@@ -54,17 +58,37 @@ int c=NULL;
 int main()
 {
     int i;
+    int a;
     srand(time(NULL));
     printf("\n\n\n                                   Bonjour! Bienvenue au jeu des...\n\n\n");
     printf("                                               7 SEAUX\n\n\n");
     printf("                          Serez-vous le plus grand mage que l'histoire ait connu?\n\n\n\n");
     nombre_joueur();
-    distrib(n);
-    for(i=0; i<=n; i++)
+    defdeck(n);
+    if (n=!3)
     {
-        affichagecartes(i);
-        prediction(i);
+        for (a=0; a<n; a++)
+        {
+            for (i=0; i<15; i++)
+            {
+                tour();
+            }
+            penalite();
+        }
     }
+    else
+    {
+        for (a=0; a<6; a++)
+        {
+            for (i=0; i<15; i++)
+            {
+                tour();
+            }
+            penalite();
+        }
+    }
+    vainqueur();
+    return 0;
 
 }
 
@@ -105,7 +129,7 @@ int nombre_joueur()
     return n;
 }
 
-int defdeck(int n)
+int defdeck(n)
 {
     if (n==3)
     {
@@ -138,7 +162,7 @@ int distrib(int n)
     }
     return 0;
 }
-void affichagecartes(f)
+void affichagecartes(int f)
 {
     int i;
     printf ("Joueur %d votre jeu \n ",i);
@@ -246,24 +270,24 @@ void affichagecartes(f)
         }
     }
 }
-int prediction(a)//c'est quoi a ? on met i plutôt non ?
+int prediction(i)
 {
     char non[] = "non";
     char reponse[3];
-    printf ("Joueur %d voulez vous prendre le mage noir?",a);
+    printf ("Joueur %d voulez vous prendre le mage noir?",i);
     scanf(reponse);
     if (strcmp(reponse,non) == 0)
     {
-        printf("\n Joueur %d quel est votre prediction pour la couleur rouge?",a);
-        scanf("%d",joueur[a].sceauR);
-        printf("\n Joueur %d quel est votre prediction pour la couleur bleu?",a);
-        scanf("%d",joueur[a].sceauB);
-        printf("\n Joueur %d quel est votre prediction pour la couleur vert?",a);
-        scanf("%d",joueur[a].sceauV);
-        printf("\n Joueur %d quel est votre prediction pour la couleur jaune?",a);
-        scanf("%d",joueur[a].sceauJ);
-        printf("\n Joueur %d quel est votre prediction pour la couleur violet?",a);
-        scanf("%d",joueur[a].sceauVi);
+        printf("\n Joueur %d quel est votre prediction pour la couleur rouge?",i);
+        scanf("%d",joueur[i].sceauR);
+        printf("\n Joueur %d quel est votre prediction pour la couleur bleu?",i);
+        scanf("%d",joueur[i].sceauB);
+        printf("\n Joueur %d quel est votre prediction pour la couleur vert?",i);
+        scanf("%d",joueur[i].sceauV);
+        printf("\n Joueur %d quel est votre prediction pour la couleur jaune?",i);
+        scanf("%d",joueur[i].sceauJ);
+        printf("\n Joueur %d quel est votre prediction pour la couleur violet?",i);
+        scanf("%d",joueur[i].sceauVi);
     }
     else;
     {
@@ -317,125 +341,315 @@ void ComparaisonCartes()
 {
     if (n<4)
         if (p>d && p>t)
+        {
             printf("le joueur 1 remporte le tour");
-            return p;
+            V=1;
+        }
         if (d>p && d>t)
+        {
             printf("le joueur 2 remporte le tour");
-            return d;
+            V=2;
+        }
         if (t>p && t>d)
+        {
             printf("le joueur 3 remporte le tour");
-            return t;
+            V=3;
+        }
     if (n=4)
         if (p>d && p>t && p>q)
-                printf("le joueur 1 remporte le tour");
-                return p;
+        {
+            printf("le joueur 1 remporte le tour");
+            V=1;
+        }
         if (d>p && d>t && d>q)
-                printf("le joueur 2 remporte le tour");
-                return d;
+        {
+            printf("le joueur 2 remporte le tour");
+            V=2;
+        }
         if (t>p && t>d && t>q)
-                printf("le joueur 3 remporte le tour");
-                return t;
+        {
+            printf("le joueur 3 remporte le tour");
+            V=3;
+        }
         if (q>p && q>d && q>t)
-                printf("le joueur 4 remporte le tour");
-                return q;
+        {
+            printf("le joueur 4 remporte le tour");
+            V=4;
+        }
     if (n>4)
         if (p>d && p>t && p>q && p>c)
-                printf("le joueur 1 remporte le tour");
-                return p;
+        {
+            printf("le joueur 1 remporte le tour");
+            V=1;
+        }
         if (d>p && d>t && d>q && d>c)
-                printf("le joueur 2 remporte le tour");
-                return d;
+        {
+            printf("le joueur 2 remporte le tour");
+            V=2;
+        }
         if (t>p && t>d && t>q && t>c)
-                printf("le joueur 3 remporte le tour");
-                return t;
+        {
+            printf("le joueur 3 remporte le tour");
+            V=3;
+        }
         if (q>p && q>d && q>t && q>c)
-                printf("le joueur 4 remporte le tour");
-                return q;
+        {
+            printf("le joueur 4 remporte le tour");
+            V=4;
+        }
         if (c>p && c>d && c>t && c>q)
-                printf("le joueur 5 remporte le tour");
-                return c;
+        {
+            printf("le joueur 5 remporte le tour");
+            V=5;
+        }
+    return V;
 }
 
-void gainSceaux()//je suis pas sûr du placement des breaks et je comprends pas le probleme
+void gainSceaux()
+{
     int r;
     int f;
     printf("\ntapez 1 si la couleur ayant remporté le plis est le rouge\ntapez 2 si la couleur ayant remporté le plis est le bleue\ntapez 3 si la couleur ayant remporté le plis est le vert\ntapez 4 si la couleur ayant remporté le plis est le jaune\ntapez 5 si la couleur ayant remporté le plis est le violet ",r);
     scanf ("%d",&r);
     switch (r)
+    {
         case 1 :
+            if (V=1)
             {
-            while (f=0)
-            {
-            if (p=!NULL && joueur[1].sceauR > 0)
-                do joueur [1].sceauR -= 1;
+                joueur [1].sceauR = joueur [1].sceauR-1;
+            }
             else
-                if (d=!NULL) && joueur[2].sceauR > 0)
-                    do joueur [2].sceauR -= 1;
+            {
+                if (V=2)
+                    joueur [2].sceauR = joueur [1].sceauR-1;
                 else
-                    if (t=!NULL) && joueur[3].sceauR > 0)
-                        do joueur [3].sceauR -= 1;
+                {
+                    if (V=3)
+                        joueur [3].sceauR = joueur [1].sceauR-1;
                     else
-                    if (q=!NULL) && joueur[4].sceauR > 0)
-                        do joueur [4].sceauR -= 1;
-                    else
-                        if (c=!NULL) && joueur[5].sceauR > 0)
-                            do joueur [5].sceauR -= 1;
+                    {
+                        if (V=4)
+                            joueur [4].sceauR = joueur [1].sceauR-1;
+                        else
+                        {
+                            if (V=5)
+                                joueur [5].sceauR = joueur [1].sceauR-1;
+                        }
+                    }
+                }
             }
-            }
-            break;
-        case 2
-            if (p=!NULL && joueur[1].sceauB =! 0)
-                do joueur[1].sceauB -= 1;
-            if (d=!NULL) && joueur[2].sceauB =! 0)
-                do joueur [2].sceauB -= 1;
-            if (t=!NULL) && joueur[3].sceauB =! 0)
-                do joueur [3].sceauB -= 1;
-            if (q=!NULL) && joueur[4].sceauB =! 0)
-                do joueur [4].sceauB -= 1;
-            if (c=!NULL) && joueur[5].sceauB =! 0)
-                do joueur [5].sceauB -= 1;
-        case 3
-            if (p=!NULL && joueur[1].sceauV =! 0)
-                do joueur[1].sceauV -= 1;
-            if (d=!NULL) && joueur[2].sceauV =! 0)
-                do joueur [2].sceauV -= 1;
-            if (t=!NULL) && joueur[3].sceauV =! 0)
-                do joueur [3].sceauV -= 1;
-            if (q=!NULL) && joueur[4].sceauV =! 0)
-                do joueur [4].sceauV -= 1;
-            if (c=!NULL) && joueur[5].sceauV =! 0)
-                do joueur [5].sceauV -= 1;
-        case 4
-            if (p=!NULL && joueur[1].sceauJ =! 0)
-                do joueur[1].sceauJ -= 1;
-            if (d=!NULL) && joueur[2].sceauJ =! 0)
-                do joueur [2].sceauJ -= 1;
-            if (t=!NULL) && joueur[3].sceauJ =! 0)
-                do joueur [3].sceauJ -= 1;
-            if (q=!NULL) && joueur[4].sceauJ =! 0)
-                do joueur [4].sceauJ -= 1;
-            if (c=!NULL) && joueur[5].sceauJ =! 0)
-                do joueur [5].sceauJ -= 1;
-        case 5
-            if (p=!NULL && joueur[1].sceauVi =! 0)
-                do joueur[1].sceauVi -= 1;
-            if (d=!NULL) && joueur[2].sceauVi =! 0)
-                do joueur [2].sceauVi -= 1;
-            if (t=!NULL) && joueur[3].sceauVi=! 0)
-                do joueur [3].sceauVi -= 1;
-            if (q=!NULL) && joueur[4].sceauVi=! 0)
-                do joueur [4].sceauVi -= 1;
-            if (c=!NULL) && joueur[5].sceauVi =! 0)
-                do joueur [5].sceauVi -= 1;
+        break;
+        case 2 :
+            if (V=1)
+                joueur[1].sceauB = joueur[1].sceauB-1;
+            if (V=2)
+                joueur [2].sceauB = joueur[1].sceauB-1;
+            if (V=3)
+                joueur [3].sceauB = joueur[1].sceauB-1;
+            if (V=4)
+                joueur [4].sceauB = joueur[1].sceauB-1;
+            if (V=5)
+                joueur [5].sceauB = joueur[1].sceauB-1;
+        break;
+        case 3 :
+            if (V=1)
+                joueur[1].sceauV = joueur[1].sceauV-1;
+            if (V=2)
+                joueur [2].sceauV = joueur[1].sceauV-1;
+            if (V=3)
+                joueur [3].sceauV = joueur[1].sceauV-1;
+            if (V=4)
+                joueur [4].sceauV = joueur[1].sceauV-1;
+            if (V=5)
+                joueur [5].sceauV = joueur[1].sceauV-1;
+        break;
+        case 4 :
+            if (V=1)
+                joueur[1].sceauJ = joueur[1].sceauJ-1;
+            if (V=2)
+                joueur [2].sceauJ = joueur[1].sceauJ-1;
+            if (V=3)
+                joueur [3].sceauJ = joueur[1].sceauJ-1;
+            if (V=4)
+                joueur [4].sceauJ = joueur[1].sceauJ-1;
+            if (V=5)
+                joueur [5].sceauJ = joueur[1].sceauJ-1;
+        break;
+        default :
+            if (V=1)
+                joueur[1].sceauVi = joueur[1].sceauVi-1;
+            if (V=2)
+                joueur [2].sceauVi = joueur[1].sceauVi-1;
+            if (V=3)
+                joueur [3].sceauVi = joueur[1].sceauVi-1;
+            if (V=4)
+                joueur [4].sceauVi = joueur[1].sceauVi-1;
+            if (V=5)
+                joueur [5].sceauVi = joueur[1].sceauVi-1;
+        break;
+    }
 }
 
-void tour1 ()
+int tour()
 {
-    for (i=nb2cartes; i>0; i-=1)
+    int i;
+    distrib(n);
+    for (i=0; i>=n; i++)
     {
+        affichagecartes(i);
+        prediction(i);
+    }
         Jeu();
         ComparaisonCartes();
         gainSceaux();
+        V=0;
+    return V;
+}
+
+int penalite()
+{
+    if (n=3)
+    {
+        joueur[1].penalite = 2*(joueur[1].sceauR + joueur[1].sceauB + joueur[1].sceauV + joueur[1].sceauJ + joueur[1].sceauVi);
+        joueur[2].penalite = 2*(joueur[2].sceauR + joueur[2].sceauB + joueur[2].sceauV + joueur[2].sceauJ + joueur[2].sceauVi);
+        joueur[3].penalite = 2*(joueur[3].sceauR + joueur[3].sceauB + joueur[3].sceauV + joueur[3].sceauJ + joueur[3].sceauVi);
+        if (joueur[1].penalite < joueur[2].penalite && joueur[1].penalite < joueur[3].penalite)
+        {
+            printf("Le joueur 1 a gagne cette manche!");
+            joueur[1].victoire = joueur[1].victoire+1;
+        }
+        if (joueur[2].penalite < joueur[1].penalite && joueur[2].penalite < joueur[3].penalite)
+        {
+            printf("Le joueur 2 a gagne cette manche!");
+            joueur[2].victoire = joueur[2].victoire+1;
+        }
+        if (joueur[3].penalite < joueur[1].penalite && joueur[3].penalite < joueur[2].penalite)
+        {
+            printf("Le joueur 3 a gagne cette manche!");
+            joueur[3].victoire = joueur[3].victoire+1;
+        }
+    }
+    if (n=4)
+    {
+        joueur[1].penalite = 2*(joueur[1].sceauR + joueur[1].sceauB + joueur[1].sceauV + joueur[1].sceauJ + joueur[1].sceauVi);
+        joueur[2].penalite = 2*(joueur[2].sceauR + joueur[2].sceauB + joueur[2].sceauV + joueur[2].sceauJ + joueur[2].sceauVi);
+        joueur[3].penalite = 2*(joueur[3].sceauR + joueur[3].sceauB + joueur[3].sceauV + joueur[3].sceauJ + joueur[3].sceauVi);
+        joueur[4].penalite = 2*(joueur[4].sceauR + joueur[4].sceauB + joueur[4].sceauV + joueur[4].sceauJ + joueur[4].sceauVi);
+        if (joueur[1].penalite < joueur[2].penalite && joueur[1].penalite < joueur[3].penalite && joueur[1].penalite < joueur[4].penalite)
+        {
+            printf("Le joueur 1 a gagne cette manche!");
+            joueur[1].victoire = joueur[1].victoire+1;
+        }
+        if (joueur[2].penalite < joueur[1].penalite && joueur[2].penalite < joueur[3].penalite && joueur[2].penalite < joueur[4].penalite)
+        {
+            printf("Le joueur 2 a gagne cette manche!");
+            joueur[2].victoire = joueur[2].victoire+1;
+        }
+        if (joueur[3].penalite < joueur[1].penalite && joueur[3].penalite < joueur[3].penalite && joueur[3].penalite < joueur[4].penalite)
+        {
+            printf("Le joueur 3 a gagne cette manche!");
+            joueur[3].victoire = joueur[3].victoire+1;
+        }
+        if (joueur[4].penalite < joueur[1].penalite && joueur[4].penalite < joueur[2].penalite && joueur[4].penalite < joueur[3].penalite)
+        {
+            printf("Le joueur 4 a gagne cette manche!");
+            joueur[4].victoire = joueur[4].victoire+1;
+        }
+    }
+    if (n=5)
+    {
+        joueur[1].penalite = 2*(joueur[1].sceauR + joueur[1].sceauB + joueur[1].sceauV + joueur[1].sceauJ + joueur[1].sceauVi);
+        joueur[2].penalite = 2*(joueur[2].sceauR + joueur[2].sceauB + joueur[2].sceauV + joueur[2].sceauJ + joueur[2].sceauVi);
+        joueur[3].penalite = 2*(joueur[3].sceauR + joueur[3].sceauB + joueur[3].sceauV + joueur[3].sceauJ + joueur[3].sceauVi);
+        joueur[4].penalite = 2*(joueur[4].sceauR + joueur[4].sceauB + joueur[4].sceauV + joueur[4].sceauJ + joueur[4].sceauVi);
+        joueur[4].penalite = 2*(joueur[5].sceauR + joueur[5].sceauB + joueur[5].sceauV + joueur[5].sceauJ + joueur[5].sceauVi);
+        if (joueur[1].penalite < joueur[2].penalite && joueur[1].penalite < joueur[3].penalite && joueur[1].penalite < joueur[4].penalite && joueur[1].penalite < joueur[5].penalite)
+        {
+            printf("Le joueur 1 a gagne cette manche!");
+            joueur[1].victoire = joueur[1].victoire+1;
+        }
+        if (joueur[2].penalite < joueur[1].penalite && joueur[2].penalite < joueur[3].penalite && joueur[2].penalite < joueur[4].penalite && joueur[2].penalite < joueur[5].penalite)
+        {
+            printf("Le joueur 2 a gagne cette manche!");
+            joueur[2].victoire = joueur[2].victoire+1;
+        }
+        if (joueur[3].penalite < joueur[1].penalite && joueur[3].penalite < joueur[2].penalite && joueur[3].penalite < joueur[4].penalite && joueur[3].penalite < joueur[5].penalite)
+        {
+            printf("Le joueur 3 a gagne cette manche!");
+            joueur[3].victoire = joueur[3].victoire+1;
+        }
+        if (joueur[4].penalite < joueur[1].penalite && joueur[4].penalite < joueur[2].penalite && joueur[4].penalite < joueur[3].penalite && joueur[4].penalite < joueur[5].penalite)
+        {
+            printf("Le joueur 4 a gagne cette manche!");
+            joueur[4].victoire = joueur[4].victoire+1;
+        }
+        if (joueur[5].penalite < joueur[1].penalite && joueur[5].penalite < joueur[2].penalite && joueur[5].penalite < joueur[3].penalite && joueur[5].penalite < joueur[4].penalite)
+        {
+            printf("Le joueur 5 a gagne cette manche!");
+            joueur[5].victoire = joueur[5].victoire+1;
+        }
     }
 }
+int vainqueur()
+{
+    if (n=3)
+    {
+        if (joueur[1].victoire < joueur[2].victoire && joueur[1].victoire < joueur[3].victoire)
+        {
+            printf("Le joueur 1 a gagne la partie!");
+        }
+        if (joueur[2].victoire < joueur[1].victoire && joueur[2].victoire < joueur[3].victoire)
+        {
+            printf("Le joueur 2 a gagne la partie!");
+        }
+        if (joueur[3].victoire < joueur[1].victoire && joueur[3].victoire < joueur[2].victoire)
+        {
+            printf("Le joueur 3 a gagne la partie!");
+        }
+    }
+    if (n=4)
+    {
+        if (joueur[1].victoire < joueur[2].victoire && joueur[1].victoire < joueur[3].victoire && joueur[1].victoire < joueur[4].victoire)
+        {
+            printf("Le joueur 1 a gagne la partie!");
+        }
+        if (joueur[2].victoire < joueur[1].victoire && joueur[2].victoire < joueur[3].victoire && joueur[2].victoire < joueur[4].victoire)
+        {
+            printf("Le joueur 2 a gagne la partie!");
+        }
+        if (joueur[3].victoire < joueur[1].victoire && joueur[3].victoire < joueur[3].victoire && joueur[3].victoire < joueur[4].victoire)
+        {
+            printf("Le joueur 3 a gagne la partie!");
+        }
+        if (joueur[4].victoire < joueur[1].victoire && joueur[4].victoire < joueur[2].victoire && joueur[4].victoire < joueur[3].victoire)
+        {
+            printf("Le joueur 4 a gagne la partie!");
+        }
+    }
+    if (n=5)
+    {
+        if (joueur[1].victoire < joueur[2].victoire && joueur[1].victoire < joueur[3].victoire && joueur[1].victoire < joueur[4].victoire && joueur[1].victoire < joueur[5].victoire)
+        {
+            printf("Le joueur 1 a gagne la partie!");
+        }
+        if (joueur[2].victoire < joueur[1].victoire && joueur[2].victoire < joueur[3].victoire && joueur[2].victoire < joueur[4].victoire && joueur[2].victoire < joueur[5].victoire)
+        {
+            printf("Le joueur 2 a gagne la partie!");
+        }
+        if (joueur[3].victoire < joueur[1].victoire && joueur[3].victoire < joueur[2].victoire && joueur[3].victoire < joueur[4].victoire && joueur[3].victoire < joueur[5].victoire)
+        {
+            printf("Le joueur 3 a gagne la partie!");
+        }
+        if (joueur[4].victoire < joueur[1].victoire && joueur[4].victoire < joueur[2].victoire && joueur[4].victoire < joueur[3].victoire && joueur[4].victoire < joueur[5].victoire)
+        {
+            printf("Le joueur 4 a gagne la partie!");
+        }
+        if (joueur[5].victoire < joueur[1].victoire && joueur[5].victoire < joueur[2].victoire && joueur[5].victoire < joueur[3].victoire && joueur[5].victoire < joueur[4].victoire)
+        {
+            printf("Le joueur 5 a gagne la partie!");
+        }
+    }
+}
+
+
 
