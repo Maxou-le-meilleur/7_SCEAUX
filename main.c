@@ -21,6 +21,7 @@ struct joueur
     int sceauV;
     int sceauJ;
     int sceauVi;
+
 };
 
 typedef struct joueur S_joueur;
@@ -41,24 +42,27 @@ void tour1(void);
 //Variable globales
 int n;
 int nb2cartes;
-int p;
-int d;
-int t;
-int q;
-int c;
+int p=0;
+int d=0;
+int t=0;
+int q=0;
+int c=0;
 
 
 //Programme principal
 
 int main()
 {
+    int i;
     srand(time(NULL));
     printf("\n\n\n                                   Bonjour! Bienvenue au jeu des...\n\n\n");
     printf("                                               7 SEAUX\n\n\n");
     printf("                          Serez-vous le plus grand mage que l'histoire ait connu?\n\n\n\n");
     nombre_joueur();
-    affichagecartes(2);
-    tour1();
+    distrib(n);
+    for(i=0; i<=n; i++)
+    affichagecartes(i);
+
 }
 
 //Prototypes
@@ -119,15 +123,15 @@ int distrib(int n)
 {
     int i;
     int tab[nb2cartes - 1];
-    for (i=0;i<= nb2cartes - 1; i++)
+    for (i=0; i<= nb2cartes - 1; i++)
     {
         tab[i] = i;
     }
-    for (i=0;i<= nb2cartes - 1; i++)
+    for (i=0; i<= nb2cartes - 1; i++)
     {
-        int alea = rand()% (nb2cartes - 1);
-        joueur[i/15].jeu[i/n]=tab[alea];
-        tab[alea]=tab[nb2cartes - 1];
+        int alea = rand()% (nb2cartes - i);
+        joueur[(i/15)+1].jeu[i/n]=tab[alea];
+        tab[alea]=tab[nb2cartes - i];
     }
     return 0;
 }
@@ -139,22 +143,102 @@ void affichagecartes(f)
     {
         if (joueur[f].jeu[e]<(nb2cartes/5))
         {
+            if (joueur[f].jeu[e]+1>(nb2cartes/5) && joueur[f].jeu[e]+1<=(2*nb2cartes/5))
+            {
+                joueur[f].jeu[e]=joueur[f].jeu[e]-(nb2cartes/5);
+            }
+            if (joueur[f].jeu[e]+1>(2*nb2cartes/5) && joueur[f].jeu[e]+1<=(3*nb2cartes/5))
+            {
+                joueur[f].jeu[e]=joueur[f].jeu[e]-(2*nb2cartes/5);
+            }
+            if (joueur[f].jeu[e]+1>(3*nb2cartes/5) && joueur[f].jeu[e]+1<=(4*nb2cartes/5))
+            {
+                joueur[f].jeu[e]=joueur[f].jeu[e]-(3*nb2cartes/5);
+            }
+            if (joueur[f].jeu[e]+1>(4*nb2cartes/5) && joueur[f].jeu[e]+1<=(nb2cartes))
+            {
+                joueur[f].jeu[e]=joueur[f].jeu[e]-(4*nb2cartes/5);
+            }
             printf("\n %d bleu", joueur[f].jeu[e]+1);
         }
         if (joueur[f].jeu[e]<(2*nb2cartes/5) && joueur[f].jeu[e]>=(nb2cartes/5));
         {
+            if (joueur[f].jeu[e]+1>(nb2cartes/5) && joueur[f].jeu[e]+1<=(2*nb2cartes/5))
+            {
+                joueur[f].jeu[e]=joueur[f].jeu[e]-(nb2cartes/5);
+            }
+            if (joueur[f].jeu[e]+1>(2*nb2cartes/5) && joueur[f].jeu[e]+1<=(3*nb2cartes/5))
+            {
+                joueur[f].jeu[e]=joueur[f].jeu[e]-(2*nb2cartes/5);
+            }
+            if (joueur[f].jeu[e]+1>(3*nb2cartes/5) && joueur[f].jeu[e]+1<=(4*nb2cartes/5))
+            {
+                joueur[f].jeu[e]=joueur[f].jeu[e]-(3*nb2cartes/5);
+            }
+            if (joueur[f].jeu[e]+1>(4*nb2cartes/5) && joueur[f].jeu[e]+1<=(nb2cartes))
+            {
+                joueur[f].jeu[e]=joueur[f].jeu[e]-(4*nb2cartes/5);
+            }
             printf("\n %d jaune", joueur[f].jeu[e]+1);
         }
         if (joueur[f].jeu[e]<(3*nb2cartes/5) && joueur[f].jeu[e]>=(2*nb2cartes/5));
         {
+            if (joueur[f].jeu[e]+1>(nb2cartes/5) && joueur[f].jeu[e]+1<=(2*nb2cartes/5))
+            {
+                joueur[f].jeu[e]=joueur[f].jeu[e]-(nb2cartes/5);
+            }
+            if (joueur[f].jeu[e]+1>(2*nb2cartes/5) && joueur[f].jeu[e]+1<=(3*nb2cartes/5))
+            {
+                joueur[f].jeu[e]=joueur[f].jeu[e]-(2*nb2cartes/5);
+            }
+            if (joueur[f].jeu[e]+1>(3*nb2cartes/5) && joueur[f].jeu[e]+1<=(4*nb2cartes/5))
+            {
+                joueur[f].jeu[e]=joueur[f].jeu[e]-(3*nb2cartes/5);
+            }
+            if (joueur[f].jeu[e]+1>(4*nb2cartes/5) && joueur[f].jeu[e]+1<=(nb2cartes))
+            {
+                joueur[f].jeu[e]=joueur[f].jeu[e]-(4*nb2cartes/5);
+            }
             printf("\n %d rouge", joueur[f].jeu[e]+1);
         }
         if (joueur[f].jeu[e]<(4*nb2cartes/5) && joueur[f].jeu[e]>=(3*nb2cartes/5));
         {
+            if (joueur[f].jeu[e]+1>(nb2cartes/5) && joueur[f].jeu[e]+1<=(2*nb2cartes/5))
+            {
+                joueur[f].jeu[e]=joueur[f].jeu[e]-(nb2cartes/5);
+            }
+            if (joueur[f].jeu[e]+1>(2*nb2cartes/5) && joueur[f].jeu[e]+1<=(3*nb2cartes/5))
+            {
+                joueur[f].jeu[e]=joueur[f].jeu[e]-(2*nb2cartes/5);
+            }
+            if (joueur[f].jeu[e]+1>(3*nb2cartes/5) && joueur[f].jeu[e]+1<=(4*nb2cartes/5))
+            {
+                joueur[f].jeu[e]=joueur[f].jeu[e]-(3*nb2cartes/5);
+            }
+            if (joueur[f].jeu[e]+1>(4*nb2cartes/5) && joueur[f].jeu[e]+1<=(nb2cartes))
+            {
+                joueur[f].jeu[e]=joueur[f].jeu[e]-(4*nb2cartes/5);
+            }
             printf("\n %d violet", joueur[f].jeu[e]+1);
         }
         if (joueur[f].jeu[e]<(5*nb2cartes/5) && joueur[f].jeu[e]>=(4*nb2cartes/5));
         {
+            if (joueur[f].jeu[e]+1>(nb2cartes/5) && joueur[f].jeu[e]+1<=(2*nb2cartes/5))
+            {
+                joueur[f].jeu[e]=joueur[f].jeu[e]-(nb2cartes/5);
+            }
+            if (joueur[f].jeu[e]+1>(2*nb2cartes/5) && joueur[f].jeu[e]+1<=(3*nb2cartes/5))
+            {
+                joueur[f].jeu[e]=joueur[f].jeu[e]-(2*nb2cartes/5);
+            }
+            if (joueur[f].jeu[e]+1>(3*nb2cartes/5) && joueur[f].jeu[e]+1<=(4*nb2cartes/5))
+            {
+                joueur[f].jeu[e]=joueur[f].jeu[e]-(3*nb2cartes/5);
+            }
+            if (joueur[f].jeu[e]+1>(4*nb2cartes/5) && joueur[f].jeu[e]+1<=(nb2cartes))
+            {
+                joueur[f].jeu[e]=joueur[f].jeu[e]-(4*nb2cartes/5);
+            }
             printf("\n %d vert", joueur[f].jeu[e]+1);
         }
     }
@@ -189,111 +273,72 @@ void Jeu()
 {
     int j;
     int r;
- //joeur 1
-      for (j=1; j<=nb2cartes; j++)
-      {
-          printf("\n !%c!",joueur[1].jeu[j]);
-      }
-      printf("\njoueur 1 quel est le numéro de la carte que vous voulez poser ?");
+ //joueur 1
+      affichagecartes(1);
+      printf("\njoueur 1 quel est le numero de la carte que vous voulez poser ?");
       scanf("%d",&r);
       printf("\nvous avez posé la carte %c", joueur[1].jeu[r]);
       joueur[1].jeu[r]= p;
 //joueur 2
-      for (j=1; j<=nb2cartes; j++)
-      {
-          printf("\n !%c!",joueur[2].jeu[j]);
-      }
-      printf("\njoueur 2 quel est le numéro de la carte que vous voulez poser ?");
+      affichagecartes(2);
+      printf("\njoueur 2 quel est le numero de la carte que vous voulez poser ?");
       scanf("%d",&r);
       printf("\nvous avez posé la carte %c", joueur[2].jeu[r]);
       joueur[2].jeu[r]= d;
 //joueur 3
-    for (j=1; j<=nb2cartes; j++)
-      {
-          printf("\n !%c!",joueur[3].jeu[j]);
-      }
-      printf("\njoueur 3 quel est le numéro de la carte que vous voulez poser ?");
+      affichagecartes(3);
+      printf("\njoueur 3 quel est le numero de la carte que vous voulez poser ?");
       scanf("%d",&r);
       printf("\nvous avez posé la carte %c", joueur[3].jeu[r]);
       joueur[3].jeu[r]= t;
 if (n>=4)
-    for (j=1; j<=nb2cartes; j++)
-      {
-          printf("\n !%c!",joueur[4].jeu[j]);
-      }
-      printf("\njoueur 4 quel est le numéro de la carte que vous voulez poser ?");
+      affichagecartes(4);
+      printf("\njoueur 4 quel est le numero de la carte que vous voulez poser ?");
       scanf("%d",&r);
       printf("\nvous avez posé la carte %c", joueur[4].jeu[r]);
       joueur[4].jeu[r]= q;
 if (n>4)
-      for (j=1; j<=nb2cartes; j++)
-      {
-          printf("\n !%c!",joueur[5].jeu[j]);
-      }
-      printf("\njoueur 5 quel est le numéro de la carte que vous voulez poser ?");
+      affichagecartes(5);
+      printf("\njoueur 5 quel est le numero de la carte que vous voulez poser ?");
       scanf("%d",&r);
       printf("\nvous avez posé la carte %c", joueur[5].jeu[r]);
       joueur[5].jeu[r]= c;
-
-
-
+    return p;
+    return q;
+    return t;
+    return c;
+    return d;
 }
 
 void Comparaisoncartes ()
 {
     if (n<4)
-        if (p>d)
-            if (p>t)
+        if (p>d && p>t)
             printf("le joueur 1 remporte le tour");
-        if (d>p)
-            if (d>t)
+        if (d>p && d>t)
             printf("le joueur 2 remporte le tour");
-        if (t>p)
-            if (t>d)
+        if (t>p && t>d)
             printf("le joueur 3 remporte le tour");
     if (n=4)
-        if (p>d)
-            if (p>t)
-                if (p>q)
+        if (p>d && p>t && p>q)
                 printf("le joueur 1 remporte le tour");
-        if (d>p)
-            if (d>t)
-                if (d>q)
+        if (d>p && d>t && d>q)
                 printf("le joueur 2 remporte le tour");
-        if (t>p)
-            if (t>d)
-                if (t>q)
+        if (t>p && t>d && t>q)
                 printf("le joueur 3 remporte le tour");
-        if (q>p)
-            if (q>d)
-                if (q>t)
+        if (q>p && q>d && q>t)
                 printf("le joueur 4 remporte le tour");
     if (n>4)
-        if (p>d)
-            if (p>t)
-                if (p>q)
-                    if (p>c)
+        if (p>d && p>t && p>q && p>c)
                 printf("le joueur 1 remporte le tour");
-        if (d>p)
-            if (d>t)
-                if (d>q)
-                    if (d>c)
+        if (d>p && d>t && d>q && d>c)
                 printf("le joueur 2 remporte le tour");
-        if (t>p)
-            if (t>d)
-                if (t>q)
-                    if (t>c)
+        if (t>p && t>d && t>q && t>c)
                 printf("le joueur 3 remporte le tour");
-        if (q>p)
-            if (q>d)
-                if (q>t)
-                    if (q>c)
+        if (q>p && q>d && q>t && q>c)
                 printf("le joueur 4 remporte le tour");
-        if (c>p)
-            if (c>d)
-                if (c>t)
-                    if (c>q)
-                        printf("le joueur 5 remporte le tour");
+        if (c>p && c>d && c>t && c>q)
+                printf("le joueur 5 remporte le tour");
 
 }
 
