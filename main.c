@@ -20,7 +20,7 @@ struct joueur
     int sceauB;
     int sceauV;
     int sceauJ;
-    int sceauVi;
+    int sceauVi;//il faut mêtre un mage noir non?
 
 };
 
@@ -42,11 +42,11 @@ void tour1(void);
 //Variable globales
 int n;
 int nb2cartes;
-int p=0;
-int d=0;
-int t=0;
-int q=0;
-int c=0;
+int p=NULL;
+int d=NULL;
+int t=NULL;
+int q=NULL;
+int c=NULL;
 
 
 //Programme principal
@@ -61,7 +61,10 @@ int main()
     nombre_joueur();
     distrib(n);
     for(i=0; i<=n; i++)
-    affichagecartes(i);
+    {
+        affichagecartes(i);
+        prediction(i);
+    }
 
 }
 
@@ -138,7 +141,7 @@ int distrib(int n)
 void affichagecartes(f)
 {
     int i;
-    printf ("Joueur 1 votre jeu \n ");
+    printf ("Joueur %d votre jeu \n ",i);
     for (int e=0; e < 15; e++)
     {
         if (joueur[f].jeu[e]<(nb2cartes/5))
@@ -243,7 +246,7 @@ void affichagecartes(f)
         }
     }
 }
-int prediction(a)
+int prediction(a)//c'est quoi a ? on met i plutôt non ?
 {
     char non[] = "non";
     char reponse[3];
@@ -310,50 +313,129 @@ if (n>4)
     return d;
 }
 
-void Comparaisoncartes ()
+void ComparaisonCartes()
 {
     if (n<4)
         if (p>d && p>t)
             printf("le joueur 1 remporte le tour");
+            return p;
         if (d>p && d>t)
             printf("le joueur 2 remporte le tour");
+            return d;
         if (t>p && t>d)
             printf("le joueur 3 remporte le tour");
+            return t;
     if (n=4)
         if (p>d && p>t && p>q)
                 printf("le joueur 1 remporte le tour");
+                return p;
         if (d>p && d>t && d>q)
                 printf("le joueur 2 remporte le tour");
+                return d;
         if (t>p && t>d && t>q)
                 printf("le joueur 3 remporte le tour");
+                return t;
         if (q>p && q>d && q>t)
                 printf("le joueur 4 remporte le tour");
+                return q;
     if (n>4)
         if (p>d && p>t && p>q && p>c)
                 printf("le joueur 1 remporte le tour");
+                return p;
         if (d>p && d>t && d>q && d>c)
                 printf("le joueur 2 remporte le tour");
+                return d;
         if (t>p && t>d && t>q && t>c)
                 printf("le joueur 3 remporte le tour");
+                return t;
         if (q>p && q>d && q>t && q>c)
                 printf("le joueur 4 remporte le tour");
+                return q;
         if (c>p && c>d && c>t && c>q)
                 printf("le joueur 5 remporte le tour");
-
+                return c;
 }
 
+void gainSceaux()//je suis pas sûr du placement des breaks et je comprends pas le probleme
+    int r;
+    int f;
+    printf("\ntapez 1 si la couleur ayant remporté le plis est le rouge\ntapez 2 si la couleur ayant remporté le plis est le bleue\ntapez 3 si la couleur ayant remporté le plis est le vert\ntapez 4 si la couleur ayant remporté le plis est le jaune\ntapez 5 si la couleur ayant remporté le plis est le violet ",r);
+    scanf ("%d",&r);
+    switch (r)
+        case 1 :
+            {
+            while (f=0)
+            {
+            if (p=!NULL && joueur[1].sceauR > 0)
+                do joueur [1].sceauR -= 1;
+            else
+                if (d=!NULL) && joueur[2].sceauR > 0)
+                    do joueur [2].sceauR -= 1;
+                else
+                    if (t=!NULL) && joueur[3].sceauR > 0)
+                        do joueur [3].sceauR -= 1;
+                    else
+                    if (q=!NULL) && joueur[4].sceauR > 0)
+                        do joueur [4].sceauR -= 1;
+                    else
+                        if (c=!NULL) && joueur[5].sceauR > 0)
+                            do joueur [5].sceauR -= 1;
+            }
+            }
+            break;
+        case 2
+            if (p=!NULL && joueur[1].sceauB =! 0)
+                do joueur[1].sceauB -= 1;
+            if (d=!NULL) && joueur[2].sceauB =! 0)
+                do joueur [2].sceauB -= 1;
+            if (t=!NULL) && joueur[3].sceauB =! 0)
+                do joueur [3].sceauB -= 1;
+            if (q=!NULL) && joueur[4].sceauB =! 0)
+                do joueur [4].sceauB -= 1;
+            if (c=!NULL) && joueur[5].sceauB =! 0)
+                do joueur [5].sceauB -= 1;
+        case 3
+            if (p=!NULL && joueur[1].sceauV =! 0)
+                do joueur[1].sceauV -= 1;
+            if (d=!NULL) && joueur[2].sceauV =! 0)
+                do joueur [2].sceauV -= 1;
+            if (t=!NULL) && joueur[3].sceauV =! 0)
+                do joueur [3].sceauV -= 1;
+            if (q=!NULL) && joueur[4].sceauV =! 0)
+                do joueur [4].sceauV -= 1;
+            if (c=!NULL) && joueur[5].sceauV =! 0)
+                do joueur [5].sceauV -= 1;
+        case 4
+            if (p=!NULL && joueur[1].sceauJ =! 0)
+                do joueur[1].sceauJ -= 1;
+            if (d=!NULL) && joueur[2].sceauJ =! 0)
+                do joueur [2].sceauJ -= 1;
+            if (t=!NULL) && joueur[3].sceauJ =! 0)
+                do joueur [3].sceauJ -= 1;
+            if (q=!NULL) && joueur[4].sceauJ =! 0)
+                do joueur [4].sceauJ -= 1;
+            if (c=!NULL) && joueur[5].sceauJ =! 0)
+                do joueur [5].sceauJ -= 1;
+        case 5
+            if (p=!NULL && joueur[1].sceauVi =! 0)
+                do joueur[1].sceauVi -= 1;
+            if (d=!NULL) && joueur[2].sceauVi =! 0)
+                do joueur [2].sceauVi -= 1;
+            if (t=!NULL) && joueur[3].sceauVi=! 0)
+                do joueur [3].sceauVi -= 1;
+            if (q=!NULL) && joueur[4].sceauVi=! 0)
+                do joueur [4].sceauVi -= 1;
+            if (c=!NULL) && joueur[5].sceauVi =! 0)
+                do joueur [5].sceauVi -= 1;
+}
 
 void tour1 ()
 {
-    int i;
-    for (i=1; i<=n; i++)
+    for (i=nb2cartes; i>0; i-=1)
     {
-        prediction(i);
+        Jeu();
+        ComparaisonCartes();
+        gainSceaux();
     }
-    Jeu();
-    Comparaisoncartes();
-
-
-
 }
 
